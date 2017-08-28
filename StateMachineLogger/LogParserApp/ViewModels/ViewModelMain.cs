@@ -11,8 +11,11 @@ namespace LogParserApp.ViewModels
 {
 	public class ViewModelMain : ViewModelBase
 	{
+		#region Properties
 		public ObservableCollection<Device> _Devices { get; set; }
 		public string _NewDevice { get; set; }
+
+		//Setup synchronization lock for writing to _Devices when updating items
 		private object _lock = new object();
 
 		public string NewDevice
@@ -41,6 +44,7 @@ namespace LogParserApp.ViewModels
 			}
 		}
 
+		//TextBox property
 		string _TextProperty;
 		public string TextProperty
 		{
@@ -57,11 +61,17 @@ namespace LogParserApp.ViewModels
 				}
 			}
 		}
+		#endregion
+
+		#region Commands
 
 		public RelayCommand AddDeviceCommand { get; set; }
 		public RelayCommand StartParserCommand { get; set; }
 		public RelayCommand CloseCommand { get; set; }
 
+		#endregion
+
+		#region Methods
 		public ViewModelMain()
 		{
 			Devices = new ObservableCollection<Device>();
@@ -92,8 +102,8 @@ namespace LogParserApp.ViewModels
 
 			Devices.Add(new Device { DeviceId = parameter.ToString(), FaultCount = 0 });
 			TextProperty = string.Empty;
-
-
+			
+			//Start Analyze on separate thread
 			Thread newThread = new Thread(() => AnalyzeLog(parameter.ToString()));
 			newThread.Start();
 
@@ -110,14 +120,18 @@ namespace LogParserApp.ViewModels
 				return;
 			LogParser parser = new LogParser();
 			StreamReader sr = new StreamReader(filePath);
+
+			//Build log for device Id
 			parser.ParseEvents(deviceId, sr);
 
-
+			//Get pattern count
 			faultCount = parser.GetEventCount(deviceId);
 
+			//Update count in list view
 			var item = Devices.FirstOrDefault(x => x.DeviceId == deviceId);
 			if (item != null)
 				item.FaultCount = faultCount;
 		}
+		#endregion
 	}
 }

@@ -12,3 +12,4 @@ C:\Users\Ethan\Documents\Repos\ReliableControls\StateMachineLogger\LogParserApp\
 C:\Users\Ethan\Documents\Repos\ReliableControls\StateMachineLogger\LogParserApp\obj\Debug\LogParserApp.csproj.GenerateResource.Cache
 C:\Users\Ethan\Documents\Repos\ReliableControls\StateMachineLogger\LogParserApp\obj\Debug\LogParserApp.exe
 C:\Users\Ethan\Documents\Repos\ReliableControls\StateMachineLogger\LogParserApp\obj\Debug\LogParserApp.pdb
+C:\Users\Ethan\Documents\Repos\ReliableControls\StateMachineLogger\LogParserApp\obj\Debug\LogParserApp.csprojResolveAssemblyReference.cache

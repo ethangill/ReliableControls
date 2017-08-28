@@ -16,6 +16,7 @@ namespace LogParserApp.Models
 		private string state1 = "1";
 		private string state0 = "0";
 
+		//IEventCounter implementation
 		public int GetEventCount(string deviceID)
 		{
 			if (logs.Count == 0)
@@ -27,20 +28,27 @@ namespace LogParserApp.Models
 
 			for (int i = 0; i < logsToCount; i++)
 			{
+				//Check for device ID and state3 match
 				if (logs[i].deviceId == deviceID && logs[i].state == state3)
 				{
+					//Check for device ID and state2 match in next 
 					if (logs[i + 1].deviceId == deviceID && logs[i + 1].state == state2)
 					{
+						//Measure how long the device has been in state3 for
+						//This has been changed to seconds to allow for faster testing
 						timeSpan = logs[i + 1].date - logs[i].date;
 						if (timeSpan.Seconds > 5)
 						{
+							//Cycle through subsequent records to check for state2 and state3 occurances
 							for (int j = i + 2; j < logsToCount; j++)
 							{
 								if (logs[j].deviceId == deviceID && (logs[j].state == state2 || logs[j].state == state3))
 								{
+									//Check for transition to state0
 									if (logs[j + 1].deviceId == deviceID && logs[j + 1].state == state0)
 									{
 										faultCount++;
+										//Set i iterator to new index to move past previous sequenced states
 										i = j + 1;
 										break;
 									}

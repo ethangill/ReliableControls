@@ -8,27 +8,17 @@ namespace StateMachineLogger
 {
 	public class Program
 	{
-		class StateTransition
-		{
-			readonly State current;
-			readonly Command command;
-			readonly int stateId;
-
-			public static int stateTransitionId;
-
-			public StateTransition(State state, Command command)
-			{
-				this.current = state;
-				this.command = command;
-				this.stateId = Interlocked.Increment(ref stateTransitionId);
-			}
-		}
-
-		List<Tuple<StateTransition, State>> transitions = new List<Tuple<StateTransition, State>>();
+		#region Properties
+		public List<Tuple<StateTransition, State>> transitions = new List<Tuple<StateTransition, State>>();
 		public State CurrentState { get; private set; }
-		public int timeMultiplier = 1; //seconds
+
+		//Represents seconds. Change to 60 for minutes. Must also change detection method in LogParser
+		public int timeMultiplier = 1;
 		public string deviceId { get; set; }
 
+		#endregion
+
+		#region Methods
 		public Program(string id)
 		{
 			CurrentState = State.Stage0;
@@ -68,61 +58,11 @@ namespace StateMachineLogger
 			CurrentState = getNext(command);
 			return CurrentState;
 		}
+		#endregion
 
-		public class csvWriter
-		{
-			StreamWriter sw;
-			static string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-			static string fileName = @"dataLog.csv";
-			static string filePath = desktopPath + "\\" + fileName;
-
-
-			public csvWriter()
-			{
-				if (!File.Exists(filePath))
-				{
-					sw = new StreamWriter(filePath);
-					sw.Close();
-				}
-				if (new FileInfo(filePath).Length == 0)
-				{
-					writeHeader();
-				}
-			}
-			public bool writeHeader()
-			{
-				sw = new StreamWriter(filePath, true);
-				if (sw != null)
-				{
-					DateTime currentDateTime = DateTime.Now;
-					sw.WriteLine("Timestamp,Value,Device ID");
-					sw.Flush();
-					sw.Close();
-					return true;
-				}
-				else
-				{
-					return false;
-				}
-			}
-			public bool writeLog(State state, string deviceId)
-			{
-				sw = new StreamWriter(filePath, true);
-				if (sw != null)
-				{
-					DateTime currentDateTime = DateTime.Now;
-					sw.WriteLine("{0},{1},{2}", currentDateTime.ToString("u"), (int)state, deviceId);
-					sw.Flush();
-					sw.Close();
-					return true;
-				}
-				else
-				{
-					return false;
-				}
-			}
-		}
-
+		#region Main Console App
+		//Main Console
+		//Takes in one argument for Device ID
 		static void Main(string[] args)
 		{
 
@@ -134,32 +74,36 @@ namespace StateMachineLogger
 
 			Program p = new Program(args[0].ToString());
 
-			csvWriter writer = new csvWriter();
+			CsvWriter writer = new CsvWriter();
 
-			//start transition
+			//Start transition
 			Console.WriteLine("Beginning Program");
 			Console.WriteLine("Current State = {0}", p.CurrentState);
 			Console.WriteLine("Starting process");
 			p.moveNext(Command.Start);
 
-			writer.writeLog(p.CurrentState, p.deviceId);
+			writer.WriteLog(p.CurrentState, p.deviceId);
 			Console.WriteLine("Current state = " + p.CurrentState);
 
 			while (true)
 			{
-				Thread.Sleep(1000 * 1); // one second delay
+				//One second delay
+				Thread.Sleep(1000 * 1);
 
 				if (p.CurrentState == State.Stage3)
 				{
+					//Randomize State3 Hold - Between 1 and 7 time units
 					Random randTime = new Random();
 					int randTimeVal = randTime.Next(1, 7);
 					Thread.Sleep(1000 * p.timeMultiplier * randTimeVal);
 				}
 
 				p.moveNext(Command.Cycle);
-				writer.writeLog(p.CurrentState, p.deviceId);
+				writer.WriteLog(p.CurrentState, p.deviceId);
 				Console.WriteLine("Current state = " + p.CurrentState);
 			}
 		}
+
+		#endregion
 	}
 }
