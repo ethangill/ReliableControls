@@ -1,0 +1,6 @@
+C:\Users\Ethan\Documents\Repos\ReliableControls\StateMachineLogger\StateMachineLogger\bin\Debug\StateMachineLogger.exe.config
+C:\Users\Ethan\Documents\Repos\ReliableControls\StateMachineLogger\StateMachineLogger\bin\Debug\StateMachineLogger.exe
+C:\Users\Ethan\Documents\Repos\ReliableControls\StateMachineLogger\StateMachineLogger\bin\Debug\StateMachineLogger.pdb
+C:\Users\Ethan\Documents\Repos\ReliableControls\StateMachineLogger\StateMachineLogger\obj\Debug\StateMachineLogger.csprojResolveAssemblyReference.cache
+C:\Users\Ethan\Documents\Repos\ReliableControls\StateMachineLogger\StateMachineLogger\obj\Debug\StateMachineLogger.exe
+C:\Users\Ethan\Documents\Repos\ReliableControls\StateMachineLogger\StateMachineLogger\obj\Debug\StateMachineLogger.pdb
