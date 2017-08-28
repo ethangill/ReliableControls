@@ -1,0 +1,14 @@
+C:\Users\Ethan\Documents\Repos\ReliableControls\StateMachineLogger\LogParserApp\bin\Debug\LogParserApp.exe.config
+C:\Users\Ethan\Documents\Repos\ReliableControls\StateMachineLogger\LogParserApp\bin\Debug\LogParserApp.exe
+C:\Users\Ethan\Documents\Repos\ReliableControls\StateMachineLogger\LogParserApp\bin\Debug\LogParserApp.pdb
+C:\Users\Ethan\Documents\Repos\ReliableControls\StateMachineLogger\LogParserApp\obj\Debug\Views\MainWindow.g.cs
+C:\Users\Ethan\Documents\Repos\ReliableControls\StateMachineLogger\LogParserApp\obj\Debug\App.g.cs
+C:\Users\Ethan\Documents\Repos\ReliableControls\StateMachineLogger\LogParserApp\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Ethan\Documents\Repos\ReliableControls\StateMachineLogger\LogParserApp\obj\Debug\LogParserApp_MarkupCompile.cache
+C:\Users\Ethan\Documents\Repos\ReliableControls\StateMachineLogger\LogParserApp\obj\Debug\LogParserApp_MarkupCompile.lref
+C:\Users\Ethan\Documents\Repos\ReliableControls\StateMachineLogger\LogParserApp\obj\Debug\Views\MainWindow.baml
+C:\Users\Ethan\Documents\Repos\ReliableControls\StateMachineLogger\LogParserApp\obj\Debug\LogParserApp.g.resources
+C:\Users\Ethan\Documents\Repos\ReliableControls\StateMachineLogger\LogParserApp\obj\Debug\LogParserApp.Properties.Resources.resources
+C:\Users\Ethan\Documents\Repos\ReliableControls\StateMachineLogger\LogParserApp\obj\Debug\LogParserApp.csproj.GenerateResource.Cache
+C:\Users\Ethan\Documents\Repos\ReliableControls\StateMachineLogger\LogParserApp\obj\Debug\LogParserApp.exe
+C:\Users\Ethan\Documents\Repos\ReliableControls\StateMachineLogger\LogParserApp\obj\Debug\LogParserApp.pdb

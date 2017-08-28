@@ -1,12 +1,29 @@
-﻿<Window x:Class="LogParserApp.MainWindow"
+﻿<Window x:Class="LogParserApp.ViewModels.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:LogParserApp"
+		xmlns:vm="clr-namespace:LogParserApp.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="350" Width="525"
+		DataContext="{DynamicResource ViewModelMain}">
+	<Window.Resources>
+		<vm:ViewModelMain x:Key="ViewModelMain"/>
+	</Window.Resources>
+	<Grid>
+		<ListView x:Name="DeviceListView" HorizontalAlignment="Left" Height="225" Margin="25,65,0,0" VerticalAlignment="Top" Width="210" AlternationCount="1" ItemsSource="{Binding Devices}">
+			<ListView.View>
+				<GridView>
+					<GridViewColumn Header="Device ID" DisplayMemberBinding="{Binding DeviceId}"/>
+					<GridViewColumn Header="# Faults" DisplayMemberBinding="{Binding FaultCount}"/>
+				</GridView>
+			</ListView.View>
+		</ListView>
+		<TextBox HorizontalAlignment="Left" Height="23" Margin="363,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" x:Name="tb1" Text="{Binding TextProperty, UpdateSourceTrigger=PropertyChanged}"/>
+		<Button x:Name="StartParsingButton" Content="Start Parsing" HorizontalAlignment="Left" VerticalAlignment="Top" Width="132" Margin="363,95,0,0" Command="{Binding StartParserCommand}" CommandParameter="{Binding Text, ElementName=tb1}"/>
+		<Button Content="Close" HorizontalAlignment="Left" Margin="420,275,0,0" VerticalAlignment="Top" Width="75"/>
+		<Label Content="Devices" HorizontalAlignment="Left" Margin="25,42,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.526,0.577" Width="55" FontSize="10" FontWeight="Bold"/>
+		<Label Content="Device ID To Add" HorizontalAlignment="Left" Margin="363,44,0,0" VerticalAlignment="Top" FontSize="10" FontWeight="Bold"/>
+	</Grid>
+	
 </Window>
